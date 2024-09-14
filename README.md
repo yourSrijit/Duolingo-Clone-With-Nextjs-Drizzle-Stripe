@@ -17,6 +17,8 @@ npm run dev
 
 
 
+https://d35aaqx5ub95lt.cloudfront.net/favicon.ico icon
+
 
 
 
