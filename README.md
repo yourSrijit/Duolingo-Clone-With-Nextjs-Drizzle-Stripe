@@ -1,16 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
+# Duolingo clone using Nextjs,Drizzle and Stripe
 ```bash
+git clone https://github.com/yourSrijit/Duolingo-Clone-With-Nextjs-Drizzle-Stripe.git
+
+cd Duolingo-Clone-With-Nextjs-Drizzle-Stripe
+
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
