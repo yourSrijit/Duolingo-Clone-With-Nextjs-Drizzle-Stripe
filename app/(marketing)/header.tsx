@@ -22,10 +22,13 @@ function Header() {
         {/* Show UserButton when Clerk has loaded and user is signed in */}
         <ClerkLoaded>
           <SignedIn>
-            <UserButton />
+            <UserButton 
+            afterSignOutUrl="/"
+            />
           </SignedIn> 
 
           <SignedOut>
+            
           <SignInButton mode="modal" afterSignInUrl="/learn" afterSignUpUrl="/learn"> 
           <Button size="lg" variant="ghost">
             Login
