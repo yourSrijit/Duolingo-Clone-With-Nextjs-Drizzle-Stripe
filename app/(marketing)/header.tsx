@@ -7,8 +7,8 @@ function Header() {
   return (
     <header className="h-20 w-full border-b-2 border-slate-200 px-4">
       <div className="lg:max-w-screen-lg mx-auto flex items-center justify-between h-full">
-        <div className="flex items-center gap-x-3">
-          <Image src="/duo.gif" height={40} width={40} alt="logo img" className="rounded-sm" unoptimized/>
+        <div className="flex items-center gap-x-3 pt-8 pl-4 pb-7">
+          <Image src="/duo.gif" height={45} width={45} alt="logo img" className="rounded-sm" unoptimized/>
           <h1 className="text-2xl font-bold text-green-600 tracking-wide inline-block">
             duoLingo
           </h1>
