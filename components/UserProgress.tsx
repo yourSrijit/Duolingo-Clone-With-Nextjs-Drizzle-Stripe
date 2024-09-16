@@ -16,7 +16,7 @@ export const UserProgress =({activeCourse,points,hearts,hasActiveSubscription}:P
             <Link href="/course">
             <Button variant="ghost">
                 <Image
-                src={activeCourse.img}
+                src={activeCourse.imageSrc}
                 alt={activeCourse.title}
                 width={36}
                 height={36}

@@ -8,10 +8,10 @@ function LearnPage() {
     <div className="flex flex-row-reverse gap-[48px] px-6">
       <StickyWrapper>
        <UserProgress
-       activeCourse={{title:"Spanish" ,img :"/es.png"}}
+       activeCourse={{title:"Spanish" ,imageSrc :"/es.png"}}
        hearts={5}
        points={100}
-       hasActiveSubscription={true}
+       hasActiveSubscription={false}
        />
       </StickyWrapper>
 
