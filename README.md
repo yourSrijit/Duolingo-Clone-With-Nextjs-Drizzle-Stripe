@@ -11,18 +11,83 @@ npm run dev
 
 
 
-
-
-
-
-
-
 https://d35aaqx5ub95lt.cloudfront.net/favicon.ico icon
 
+## Drizzle Setup and DB Connection ⭐🫠
+First of all we need any database link do we can do crus operation remotly .neon .aiven is the best option for postgras databse
+
+1. Create one postgres link and install this dependencies
+```npm
+npm i drizzle-orm @neondatabase/serverless
+npm i -D drizzle-kit
+```
+
+2. Create a `schema.ts` file for you table like this for your table and model
+
+```javascript
+
+import { pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
+
+export const courses=pgTable("courses",{
+    id:serial("id").primaryKey(),
+    title:text("title").notNull(),
+    imageSrc:text("img_src").notNull()
+})
+```
+
+3. Create one `drizzle.ts` file for the db
+```javascript
+import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
+
+import * as schema from "./schema"
+
+const sql = neon(process.env.DRIZZLE_DATABASE_URL!);
+const db = drizzle(sql,{schema});
+
+export default db
 
 
 
+⭐⭐⭐⭐⭐
+// you can done operation like this way 
 
+const result = await db.query.users.findMany({
+  with: {
+    posts: true      
+  },
+});
+//and if you have multiple schema then you can do this way
+import * as schema1 from './schema1';
+import * as schema2 from './schema2';
+import { drizzle } from 'drizzle-orm/...';
+const db = drizzle(client, { schema: { ...schema1, ...schema2 } });
+```
+4. Time to Configure the drizzle `drizzle.config.ts`
+
+```javascript
+import "dotenv/config";
+import { defineConfig } from "drizzle-kit";
+
+export default defineConfig({
+  dialect: "postgresql",     //which type of databse
+  schema: "./db/schema.ts",  //where the schema file exists
+  out: "./migration",        //Store migration files, meta, and journal
+  dbCredentials: {
+    url: process.env.DRIZZLE_DATABASE_URL!,  //db url
+  },
+});
+ 
+```
+5. Run this commands 
+
+```npm
+npx drizzle-kit push: Pushes the current database migration to the database.
+npx drizzle-kit studio: Opens a web interface to manage and visualize the database schema.
+npx drizzle-kit up: Runs the pending migrations to update the database schema.
+npx drizzle-kit generate --name init_db: Generates a new migration file with the name `init_db`.
+drizzle-kit migrate: Executes all pending migrations to synchronize the database with the latest schema.
+```
 
 
 

@@ -6,5 +6,4 @@ import * as schema from "./schema"
 const sql = neon(process.env.DRIZZLE_DATABASE_URL!);
 const db = drizzle(sql,{schema});
 
-// const result = await db.select().from(...);
 export default db
