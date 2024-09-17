@@ -8,7 +8,7 @@ async function Coursepage() {
   return (
     <div className="h-full max-w-[912px] px-3 mx-auto">
         <h1 className="text-2xl font-bold text-neutral-700">
-            Language course
+            Language Course
         </h1>
         <List
         activeCourseId={1}
