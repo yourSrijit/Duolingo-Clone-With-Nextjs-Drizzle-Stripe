@@ -1,3 +1,5 @@
+<h1 align="center">Currently in Development phase 🐲</h1>
+
 # Duolingo clone using Nextjs,Drizzle and Stripe
 ```bash
 git clone https://github.com/yourSrijit/Duolingo-Clone-With-Nextjs-Drizzle-Stripe.git
@@ -7,8 +9,6 @@ cd Duolingo-Clone-With-Nextjs-Drizzle-Stripe
 npm install
 npm run dev
 ```
-
-
 
 
 https://d35aaqx5ub95lt.cloudfront.net/favicon.ico icon
@@ -87,6 +87,66 @@ npx drizzle-kit studio: Opens a web interface to manage and visualize the databa
 npx drizzle-kit up: Runs the pending migrations to update the database schema.
 npx drizzle-kit generate --name init_db: Generates a new migration file with the name `init_db`.
 drizzle-kit migrate: Executes all pending migrations to synchronize the database with the latest schema.
+```
+---
+## Seed Databse 
+Database seeding is populating a database with an initial set of data. It is common to load seed data such as initial user accounts or dummy data upon initial setup of an application.
+
+```javascript
+import "dotenv/config"
+import { drizzle } from "drizzle-orm/neon-http"
+import { neon } from "@neondatabase/serverless"
+
+import * as Schema from "../db/schema";
+
+const sql=neon(process.env.DRIZZLE_DATABASE_URL!);
+
+//@ts-ignore
+const db=drizzle(sql, {Schema});
+
+const main = async()=>{
+    try{
+        console.log("Seeding Database");
+        
+        await db.delete(Schema.courses);
+        await db.delete(Schema.userProgress);
+
+        await db.insert(Schema.courses).values([
+            {
+                id:1,
+                title:"Spanish",
+                imageSrc:"/es.png"
+            },
+            {
+                id:2,
+                title:"Croatian",
+                imageSrc:"/hr.png"
+            },
+            {
+                id:3,
+                title:"Hindi",
+                imageSrc:"/in.png"
+            },
+            {
+                id:4,
+                title:"French",
+                imageSrc:"/fr.png"
+            },
+            {
+                id:5,
+                title:"Japanese",
+                imageSrc:"/jp.png"
+            },
+        ])
+
+        console.log("Sedding finished");
+    }catch(error){
+        console.log(error);
+    throw new Error("Failed to seed the databse");  
+     } 
+}
+
+main();
 ```
 
 
