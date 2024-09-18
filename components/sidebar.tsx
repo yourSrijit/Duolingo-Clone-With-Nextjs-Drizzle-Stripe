@@ -21,7 +21,7 @@ function Sidebar({className}:Props) {
         </div>
       </Link>
       <div className="flex flex-1 flex-col gap-y-6">
-        <SidebarItem label="Home" href="/learn" icon="/home.png"/>
+        <SidebarItem label="Learn" href="/learn" icon="/home.png"/>
         <SidebarItem label="leaderboard" href="/leaderboard" icon="/leaderboard.png"/>
         <SidebarItem label="quests" href="/quests" icon="/quests.png"/>
         <SidebarItem label="shop" href="/shop" icon="/shop.png"/>
