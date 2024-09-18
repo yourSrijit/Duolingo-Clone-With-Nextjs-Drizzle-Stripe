@@ -7,6 +7,8 @@ import { useTransition } from "react"
 import { useRouter } from "next/navigation"
 import { upsertUserProgress } from "@/action/user-progress"
 
+import { toast } from "sonner"
+
 type Props={
     courses: typeof courses.$inferSelect[],
     activeCourseId?:typeof userProgress.$inferInsert.activeCourseId
@@ -25,7 +27,8 @@ export const List=({courses,activeCourseId}:Props)=>{
             return router.push("/learn");
         }
         startTransition(()=>{
-            upsertUserProgress(id);
+            upsertUserProgress(id)
+             .catch(()=> toast.error("Something went wrong"))
         });
     };
 
