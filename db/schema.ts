@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { integer, pgEnum, pgTable, point, serial, text, varchar } from "drizzle-orm/pg-core";
+import { boolean, integer, pgEnum, pgTable, point, serial, text, varchar } from "drizzle-orm/pg-core";
 import { title } from "process";
 
 export const courses=pgTable("courses",{
@@ -56,15 +56,55 @@ export const challenges=pgTable("challenges",{
     type :challengesEnum("type").notNull(),
     question: text("question").notNull(),
     order:integer("order").notNull()
+});
 
-})
 export const challengesRelations=relations(challenges,({one,many})=>
 ({
     lessons:one(lessons,{
         fields:[challenges.lessonId],
         references:[lessons.id]
-    })
+    }),
+    challengeOptions:many(challengeOptions),
+    challengeProgress:many(challengeProgress),
 }))
+
+//ChallengeOption
+export const challengeOptions=pgTable("challenge_options",{
+    id:serial("id").primaryKey(),
+    challengeId:integer("challenge_id").references(()=> challenges.id ,{onDelete:"cascade"}).notNull(),
+    text :text("text").notNull(),
+    correct:boolean("correct").notNull(),
+    imageSrc: text("image_src"),
+    audioSrc:integer("audio_src")
+});
+
+export const challengeOptionsRelations=relations(challengeOptions,({one})=>
+    ({
+        challenge:one(challenges,{
+            fields:[challengeOptions.challengeId],
+            references:[challenges.id]
+        })
+    }))
+
+
+//ChallengeProgress
+
+export const challengeProgress=pgTable("challenge_progress",{
+    id:serial("id").primaryKey(),
+    userId:text("user_id").notNull(), ///TODE: Confirm that this does't break
+    challengeId:integer("challenge_id").references(() => challenges.id, {
+    onDelete:"cascade" }).notNull(),
+    completed:boolean("completed").notNull().default(false)
+});
+
+export const challengeProgressRelations=relations(challengeProgress,({one})=>
+    ({
+        challenge:one(challenges,{
+            fields:[challengeProgress.challengeId],
+            references:[challenges.id]
+        })
+    }))
+
 
 //User Progress
 export const userProgress =pgTable("user_progress",{
