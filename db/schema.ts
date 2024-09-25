@@ -75,7 +75,7 @@ export const challengeOptions=pgTable("challenge_options",{
     text :text("text").notNull(),
     correct:boolean("correct").notNull(),
     imageSrc: text("image_src"),
-    audioSrc:integer("audio_src")
+    audioSrc:text("audio_src")
 });
 
 export const challengeOptionsRelations=relations(challengeOptions,({one})=>
