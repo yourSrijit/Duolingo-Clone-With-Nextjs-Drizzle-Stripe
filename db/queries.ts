@@ -1,7 +1,7 @@
 import { cache } from "react";
 import db from "./drizzle";
 import { auth } from "@clerk/nextjs/server";
-import { courses, units, userProgress } from "./schema";
+import { courses, lessons, units, userProgress } from "./schema";
 import { eq } from "drizzle-orm";
 
 export const getCourses=cache(
@@ -42,13 +42,21 @@ export const getUnits=cache(async()=>{
                     challenges:{
                         with:{
                             challengeProgress:true
-                        }
-                    }
-                }
-            }
-        }
-    })
+                        },
+                    },
+                },
+            },
+        },
+    });
 
+    const normalizeData=data.map((unit)=>{
+        const lessonsWithCompletedStatus=unit.lessons.map((lesson)=>{
+            const allCompletedhallenges=lesson.challenges.every((challenge)=>{
+                return challenge.challengeProgress
+                && challenge.challengeProgress.length > 0
+            })
+        })
+    })
 
 
 })
