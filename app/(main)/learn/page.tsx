@@ -4,6 +4,7 @@ import { Header } from "./header"
 import { UserProgress } from "@/components/UserProgress"
 import { getUnits, getUserProgress } from "@/db/queries"
 import { redirect } from "next/navigation"
+import Unit from "./Unit"
 
 
 
@@ -33,7 +34,17 @@ async function LearnPage() {
         {
           units.map((unit)=> (
             <div key={unit.id} className="mb-10">
-              {JSON.stringify(unit)}
+             
+             <Unit
+             id={unit.id}
+             order={unit.order}
+             description={unit.description}
+             title={unit.title}
+             lessons={unit.lessons}
+             activeCourse={null}
+             activeLessonPercentage={0}
+             lessons={unit.lessons}
+             />
             </div>
           ))
         }
