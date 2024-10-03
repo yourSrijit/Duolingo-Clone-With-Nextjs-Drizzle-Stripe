@@ -41,9 +41,9 @@ async function LearnPage() {
              description={unit.description}
              title={unit.title}
              lessons={unit.lessons}
-             activeCourse={null}
+             activeLesson={undefined}
              activeLessonPercentage={0}
-             lessons={unit.lessons}
+            //  lessons={unit.lessons}
              />
             </div>
           ))
